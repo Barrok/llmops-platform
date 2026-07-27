@@ -111,13 +111,13 @@ Workers --> VectorDB
 # Project Roadmap
 
 ## Phase 1 — Foundation
-Current phase.
 - repository setup
 - development environment
 - project structure
 - documentation baseline
 
 ## Phase 2 — Application Core
+Current phase.
 - API service
 - RAG pipeline
 - document ingestion
