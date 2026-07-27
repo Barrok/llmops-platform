@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from app.core.logging import logger
 
 router = APIRouter()
 
@@ -8,4 +9,9 @@ def read_root():
 
 @router.get("/health")
 def health_check():
-    return {"status": "healthy", "version": "0.1.0"}
+    logger.info("Health check requested")
+
+    return {
+        "status": "healthy",
+        "version": "0.1.0"
+    }
