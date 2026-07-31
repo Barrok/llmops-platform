@@ -1,9 +1,8 @@
 from fastapi import FastAPI
 
 from app.api.routes import router
-from app.core.logging import logger
 from app.config.settings import settings
-
+from app.core.logging import logger
 
 app = FastAPI(
     title=settings.APP_NAME,
