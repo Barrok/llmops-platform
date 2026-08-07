@@ -1,4 +1,4 @@
-.PHONY: lint format run
+.PHONY: lint format test check run
 
 lint:
 	uv run ruff check .
