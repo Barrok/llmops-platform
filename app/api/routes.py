@@ -25,6 +25,9 @@ def chat(
     request: ChatRequest,
     agent: AgentService = Depends(get_agent_service),  # noqa: B008
 ):
-    response = agent.chat(request.message)
+    response = agent.chat(
+        request.conversation_id,
+        request.message,
+    )
 
     return ChatResponse(response=response)

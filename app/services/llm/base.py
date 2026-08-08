@@ -5,6 +5,6 @@ class LLMClient(ABC):
     """Interface for language model providers."""
 
     @abstractmethod
-    def generate(self, prompt: str) -> str:
-        """Generate response from LLM."""
+    def generate(self, messages: list[dict[str, str]]) -> str:
+        """Generate response from LLM using conversation messages."""
         pass
