@@ -39,17 +39,15 @@ flowchart LR
     API --> Agent[AgentService]
 
     Agent --> LLM[LLMClient]
-    LLM --> OllamaClient[OllamaClient]
-    OllamaClient --> Runtime[Ollama]
-    Runtime --> Model[Qwen3:8b]
+    LLM --> OllamaLLM[Ollama]
+    OllamaLLM --> Qwen[Qwen3:8b]
 
-    Agent --> RAG[RAG Pipeline]
-    RAG --> Ingestion[Document Ingestion]
+    Documents[Documents] --> Ingestion[Document Ingestion]
     Ingestion --> Chunker[Document Chunking]
     Chunker --> Embedding[Embedding Pipeline]
-    Embedding --> EmbedClient[EmbeddingClient]
-    EmbedClient --> OllamaEmbed[Ollama]
-    OllamaEmbed --> EmbedModel[nomic-embed-text]
+    Embedding --> OllamaEmbed[Ollama]
+    OllamaEmbed --> Nomic[nomic-embed-text]
+    Embedding --> EmbeddedChunk[EmbeddedChunk]
 ```
 ## RAG Pipeline
 The current document processing pipeline is:
