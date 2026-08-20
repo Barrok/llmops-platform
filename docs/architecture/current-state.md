@@ -18,6 +18,9 @@ The current system provides:
 - Docker Compose environment
 - NVIDIA GPU acceleration
 - Unit and integration tests
+- Document ingestion for TXT, Markdown and PDF files
+- Document model with source and metadata
+- Single-file and directory ingestion
 
 ## Current Runtime
 
