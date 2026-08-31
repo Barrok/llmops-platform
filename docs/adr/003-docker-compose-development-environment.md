@@ -39,7 +39,7 @@ flowchart LR
 - API and Ollama run as isolated services.
 - Service communication is reproducible.
 - The complete local environment can be started with a single command.
-- The architecture can later be adapted to a more advanced orchestration platform.
+- Explicit service boundaries in Compose mirror how services will later be defined in Kubernetes manifests, reducing (but not eliminating) rework.
 
 ### Negative
 

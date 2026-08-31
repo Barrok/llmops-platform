@@ -89,11 +89,13 @@ Workers --> VectorDB
 ## CI/CD
 - Git
 - GitLab CI
-- Observability
+
+## Observability
 - Prometheus
 - Grafana
 - OpenTelemetry
-- Testing
+
+## Testing
 - Pytest
 - Locust / Gatling
 

@@ -8,6 +8,7 @@ dependencies = [
     "ollama>=0.6.2",
     "pydantic-settings>=2.14.2",
     "pypdf>=6.16.1",
+    "qdrant-client>=1.19.0",
     "uvicorn>=0.51.0",
 ]
 
