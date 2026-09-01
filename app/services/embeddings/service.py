@@ -22,3 +22,7 @@ class EmbeddingService:
         chunks: list[DocumentChunk],
     ) -> list[EmbeddedChunk]:
         return [self.embed_chunk(chunk) for chunk in chunks]
+
+    def embed_query(self, query: str) -> list[float]:
+        """Generate an embedding for a search query."""
+        return self.client.embed(query)

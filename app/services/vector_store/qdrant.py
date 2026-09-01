@@ -3,11 +3,13 @@ import uuid
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
 
+from app.models.chunk import DocumentChunk
 from app.models.embedded_chunk import EmbeddedChunk
 from app.services.vector_store.base import VectorStore
+from app.services.vector_store.retriever import Retriever
 
 
-class QdrantVectorStore(VectorStore):
+class QdrantVectorStore(VectorStore, Retriever):
     """Qdrant implementation of the vector store."""
 
     def __init__(
@@ -64,3 +66,24 @@ class QdrantVectorStore(VectorStore):
                 collection_name=self.collection_name,
                 points=points,
             )
+
+    def retrieve(
+        self,
+        query_embedding: list[float],
+        limit: int = 5,
+    ) -> list[DocumentChunk]:
+        results = self.client.query_points(
+            collection_name=self.collection_name,
+            query=query_embedding,
+            limit=limit,
+            with_payload=True,
+        )
+
+        return [
+            DocumentChunk(
+                content=point.payload["content"],
+                source=point.payload["source"],
+                metadata=point.payload["metadata"],
+            )
+            for point in results.points
+        ]

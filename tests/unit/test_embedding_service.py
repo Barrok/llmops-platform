@@ -58,3 +58,15 @@ def test_embed_chunks():
     assert results[1].embedding == [0.3, 0.4]
 
     assert client.embed.call_count == 2
+
+
+def test_embed_query():
+    client = Mock()
+    client.embed.return_value = [0.1, 0.2, 0.3]
+
+    service = EmbeddingService(client)
+
+    result = service.embed_query("What is Python?")
+
+    client.embed.assert_called_once_with("What is Python?")
+    assert result == [0.1, 0.2, 0.3]

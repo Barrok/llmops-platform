@@ -67,3 +67,43 @@ def test_qdrant_vector_store_upserts_chunks(mock_client):
         "source": "test.txt",
         "metadata": {"format": "txt"},
     }
+
+
+@patch("app.services.vector_store.qdrant.QdrantClient")
+def test_qdrant_vector_store_retrieves_chunks(mock_client):
+    mock_instance = MagicMock()
+    mock_instance.get_collections.return_value.collections = []
+    mock_client.return_value = mock_instance
+
+    payload = {
+        "content": "Hello world",
+        "source": "test.txt",
+        "metadata": {"format": "txt"},
+    }
+
+    point = MagicMock()
+    point.payload = payload
+
+    mock_instance.query_points.return_value.points = [point]
+
+    store = QdrantVectorStore()
+
+    result = store.retrieve(
+        query_embedding=[0.1] * 768,
+        limit=3,
+    )
+
+    mock_instance.query_points.assert_called_once_with(
+        collection_name="documents",
+        query=[0.1] * 768,
+        limit=3,
+        with_payload=True,
+    )
+
+    assert result == [
+        DocumentChunk(
+            content="Hello world",
+            source="test.txt",
+            metadata={"format": "txt"},
+        )
+    ]
