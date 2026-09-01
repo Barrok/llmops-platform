@@ -1,0 +1,2 @@
+Docker is a platform for packaging applications into containers.
+Containers isolate applications and their dependencies from the host environment.
