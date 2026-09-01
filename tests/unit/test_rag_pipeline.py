@@ -8,6 +8,8 @@ from app.services.rag.pipeline import RAGPipeline
 def test_process_directory():
     ingestion_service = Mock()
     embedding_service = Mock()
+    retrieval_service = Mock()
+    vector_store = Mock()
 
     chunks = [
         DocumentChunk(
@@ -39,6 +41,8 @@ def test_process_directory():
     pipeline = RAGPipeline(
         ingestion_service=ingestion_service,
         embedding_service=embedding_service,
+        retrieval_service=retrieval_service,
+        vector_store=vector_store,
     )
 
     result = pipeline.process_directory("data/documents")
@@ -51,4 +55,44 @@ def test_process_directory():
         chunks,
     )
 
+    vector_store.upsert.assert_called_once_with(
+        embedded_chunks,
+    )
+
     assert result == embedded_chunks
+
+
+def test_retrieve():
+    ingestion_service = Mock()
+    embedding_service = Mock()
+    retrieval_service = Mock()
+    vector_store = Mock()
+
+    expected_chunks = [
+        DocumentChunk(
+            content="Python is a programming language.",
+            source="python.txt",
+            metadata={"format": "txt"},
+        ),
+    ]
+
+    retrieval_service.retrieve.return_value = expected_chunks
+
+    pipeline = RAGPipeline(
+        ingestion_service=ingestion_service,
+        embedding_service=embedding_service,
+        retrieval_service=retrieval_service,
+        vector_store=vector_store,
+    )
+
+    result = pipeline.retrieve(
+        query="What is Python?",
+        limit=3,
+    )
+
+    retrieval_service.retrieve.assert_called_once_with(
+        query="What is Python?",
+        limit=3,
+    )
+
+    assert result == expected_chunks

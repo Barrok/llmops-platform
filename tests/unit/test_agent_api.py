@@ -1,3 +1,5 @@
+from unittest.mock import Mock
+
 from fastapi.testclient import TestClient
 
 from app.dependencies.providers import get_agent_service
@@ -6,6 +8,7 @@ from app.services.agent.conversation import ConversationManager
 from app.services.agent.prompts import PromptManager
 from app.services.agent.service import AgentService
 from app.services.llm.base import LLMClient
+from app.services.rag.context import ContextBuilder
 
 
 class FakeAgentService:
@@ -88,10 +91,15 @@ def test_agent_chat_endpoint_integrates_with_agent_service():
         def generate(self, messages: list[dict[str, str]]) -> str:
             return f"Response {len(messages)}"
 
+    retrieval_service = Mock()
+    retrieval_service.retrieve.return_value = []
+
     fake_agent = AgentService(
         llm_client=FakeLLMClient(),
         prompt_manager=PromptManager(),
         conversation_manager=ConversationManager(),
+        retrieval_service=retrieval_service,
+        context_builder=ContextBuilder(),
     )
 
     app.dependency_overrides[get_agent_service] = lambda: fake_agent
