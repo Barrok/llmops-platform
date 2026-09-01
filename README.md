@@ -32,74 +32,84 @@ The platform aims to demonstrate:
 
 ---
 
-# High-Level Architecture
+## High-Level Architecture
 
-The system will evolve from a simple application into a production-oriented distributed architecture.
+The current system is implemented as a modular monolith following Clean Architecture principles.
 
-Initial architecture:
+The application is organized into independent domain modules with clear
+boundaries and dependency inversion. This structure allows individual
+components to be extracted into separate services as the platform evolves.
+
+### Current architecture:
 
 ```mermaid
 flowchart LR
 
 User --> API
 
-API --> RAG[RAG Pipeline]
+API --> Agent
 
-RAG --> VectorDB[(Vector Database)]
+Agent --> LLM
+Agent --> Retrieval
 
-RAG --> LLM[Local LLM]
-
-API --> Cache[(Redis)]
-
-API --> Queue[RabbitMQ]
-
-Queue --> Workers
-
-Workers --> VectorDB
+Retrieval --> Embeddings
+Embeddings --> VectorDB
 ```
 
 ---
 
 # Planned Technology Stack
 
-## Backend
+## Currently Implemented
+
+### Backend
 - Python
 - FastAPI
 - Pydantic
 
-## AI / LLM
+### AI / LLM
 - RAG architecture
+- Ollama
+- Qwen3:8b
+- nomic-embed-text
 - Embeddings
 - Vector search
-- Local LLM inference
 
-## Data Layer
-- Qdrant (Vector Database)
-- Redis (Cache)
+### Data Layer
+- Qdrant
 
-## Messaging
+### Infrastructure
+- Docker
+- Docker Compose
+
+### Testing
+- Pytest
+
+## Planned
+
+### Data Layer
+- Redis
+
+### Messaging
 - RabbitMQ
 
-## Infrastructure
-- Docker
+### Infrastructure
 - Kubernetes
 - Helm
 - Terraform
 
-## CI/CD
-- Git
+### CI/CD
 - GitLab CI
 
-## Observability
+### Observability
 - Prometheus
 - Grafana
 - OpenTelemetry
 
-## Testing
-- Pytest
+### Testing
 - Locust / Gatling
 
-## Security
+### Security
 - Kubernetes Secrets
 - Sealed Secrets
 - JWT authentication
@@ -119,13 +129,13 @@ Workers --> VectorDB
 - documentation baseline
 
 ## Phase 2 — Application Core
-Current phase.
 - API service
 - RAG pipeline
 - document ingestion
 - vector search
 
 ## Phase 3 — Production Architecture
+Current phase.
 - asynchronous workers
 - message queues
 - caching
