@@ -2,9 +2,10 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from app.models.chunk import DocumentChunk
 from app.models.document import Document
+from app.services.ingestion.port import ChunkerPort
 
 
-class DocumentChunker:
+class DocumentChunker(ChunkerPort):
     """Splits documents into overlapping chunks."""
 
     def __init__(

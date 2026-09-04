@@ -2,8 +2,8 @@ from pathlib import Path
 
 from app.models.chunk import DocumentChunk
 from app.models.document import Document
-from app.services.ingestion.chunker import DocumentChunker
 from app.services.ingestion.loader import DocumentLoader
+from app.services.ingestion.port import ChunkerPort
 
 
 class DocumentIngestionService:
@@ -12,7 +12,7 @@ class DocumentIngestionService:
     def __init__(
         self,
         loader: DocumentLoader,
-        chunker: DocumentChunker,
+        chunker: ChunkerPort,
     ):
         self.loader = loader
         self.chunker = chunker
