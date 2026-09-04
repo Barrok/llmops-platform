@@ -8,7 +8,7 @@ from app.services.embeddings.service import EmbeddingService
 from app.services.ingestion.chunker import DocumentChunker
 from app.services.ingestion.loader import DocumentLoader
 from app.services.ingestion.service import DocumentIngestionService
-from app.services.rag.pipeline import RAGPipeline
+from app.services.rag.indexing_pipeline import DocumentIndexingPipeline
 from app.services.retrieval.service import RetrievalService
 from app.services.vector_store.qdrant import QdrantVectorStore
 
@@ -45,7 +45,7 @@ def test_rag_pipeline_indexes_and_retrieves(tmp_path: Path):
         retriever=vector_store,
     )
 
-    pipeline = RAGPipeline(
+    pipeline = DocumentIndexingPipeline(
         ingestion_service=ingestion_service,
         embedding_service=embedding_service,
         retrieval_service=retrieval_service,

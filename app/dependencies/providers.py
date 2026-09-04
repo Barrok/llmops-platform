@@ -38,14 +38,11 @@ def get_retrieval_service() -> RetrievalService:
     )
 
 
-_agent_service = AgentService(
-    llm_client=get_llm_client(),
-    prompt_manager=get_prompt_manager(),
-    conversation_manager=get_conversation_manager(),
-    retrieval_service=get_retrieval_service(),
-    context_builder=ContextBuilder(),
-)
-
-
 def get_agent_service() -> AgentService:
-    return _agent_service
+    return AgentService(
+        llm_client=get_llm_client(),
+        prompt_manager=get_prompt_manager(),
+        conversation_manager=get_conversation_manager(),
+        retrieval_service=get_retrieval_service(),
+        context_builder=ContextBuilder(),
+    )

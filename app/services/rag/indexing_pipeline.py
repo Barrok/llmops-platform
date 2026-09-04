@@ -6,7 +6,7 @@ from app.services.retrieval.service import RetrievalService
 from app.services.vector_store.base import VectorStore
 
 
-class RAGPipeline:
+class DocumentIndexingPipeline:
     """Orchestrates document processing and retrieval."""
 
     def __init__(

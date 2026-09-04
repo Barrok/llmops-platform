@@ -9,7 +9,7 @@ from app.services.evaluation.runner import RetrievalEvaluationRunner
 from app.services.ingestion.chunker import DocumentChunker
 from app.services.ingestion.loader import DocumentLoader
 from app.services.ingestion.service import DocumentIngestionService
-from app.services.rag.pipeline import RAGPipeline
+from app.services.rag.indexing_pipeline import DocumentIndexingPipeline
 from app.services.retrieval.service import RetrievalService
 from app.services.vector_store.qdrant import QdrantVectorStore
 from tests.evaluation.retrieval_dataset import EVALUATION_CASES
@@ -41,7 +41,7 @@ def test_retrieval_evaluation():
         retriever=vector_store,
     )
 
-    pipeline = RAGPipeline(
+    pipeline = DocumentIndexingPipeline(
         ingestion_service=ingestion_service,
         embedding_service=embedding_service,
         retrieval_service=retrieval_service,

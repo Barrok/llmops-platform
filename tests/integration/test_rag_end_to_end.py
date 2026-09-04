@@ -13,7 +13,7 @@ from app.services.ingestion.loader import DocumentLoader
 from app.services.ingestion.service import DocumentIngestionService
 from app.services.llm.ollama import OllamaClient
 from app.services.rag.context import ContextBuilder
-from app.services.rag.pipeline import RAGPipeline
+from app.services.rag.indexing_pipeline import DocumentIndexingPipeline
 from app.services.retrieval.service import RetrievalService
 from app.services.vector_store.qdrant import QdrantVectorStore
 
@@ -45,7 +45,7 @@ def test_rag_end_to_end():
         retriever=vector_store,
     )
 
-    pipeline = RAGPipeline(
+    pipeline = DocumentIndexingPipeline(
         ingestion_service=ingestion_service,
         embedding_service=embedding_service,
         retrieval_service=retrieval_service,
