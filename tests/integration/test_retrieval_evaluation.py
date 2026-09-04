@@ -5,19 +5,19 @@ import pytest
 
 from app.services.embeddings.ollama import OllamaEmbeddingClient
 from app.services.embeddings.service import EmbeddingService
-from app.services.evaluation.runner import RetrievalEvaluationRunner
 from app.services.ingestion.chunker import DocumentChunker
 from app.services.ingestion.loader import DocumentLoader
 from app.services.ingestion.service import DocumentIngestionService
 from app.services.rag.indexing_pipeline import DocumentIndexingPipeline
 from app.services.retrieval.service import RetrievalService
 from app.services.vector_store.qdrant import QdrantVectorStore
-from tests.evaluation.retrieval_dataset import EVALUATION_CASES
+from evaluation.dataset import EVALUATION_CASES
+from evaluation.runner import RetrievalEvaluationRunner
 
 
 @pytest.mark.integration
 def test_retrieval_evaluation():
-    data_path = Path("tests/evaluation/data")
+    data_path = Path("evaluation/data")
     collection_name = f"test_eval_{uuid.uuid4().hex}"
 
     embedding_service = EmbeddingService(

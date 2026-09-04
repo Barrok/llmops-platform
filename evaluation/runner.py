@@ -1,8 +1,8 @@
 from pathlib import Path
 
-from app.services.evaluation.retrieval import recall_at_k
 from app.services.retrieval.service import RetrievalService
-from tests.evaluation.retrieval_dataset import RetrievalEvaluationCase
+from evaluation.dataset import RetrievalEvaluationCase
+from evaluation.retrieval import recall_at_k
 
 
 class RetrievalEvaluationRunner:

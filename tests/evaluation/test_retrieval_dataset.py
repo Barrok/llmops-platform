@@ -1,4 +1,4 @@
-from tests.evaluation.retrieval_dataset import EVALUATION_CASES
+from evaluation.dataset import EVALUATION_CASES
 
 
 def test_retrieval_evaluation_dataset():

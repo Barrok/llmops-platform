@@ -1,4 +1,4 @@
-from app.services.evaluation.retrieval import recall_at_k
+from evaluation.retrieval import recall_at_k
 
 
 def test_recall_at_k_all_relevant_found():

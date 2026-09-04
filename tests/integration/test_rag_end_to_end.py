@@ -20,7 +20,7 @@ from app.services.vector_store.qdrant import QdrantVectorStore
 
 @pytest.mark.integration
 def test_rag_end_to_end():
-    data_path = Path("tests/evaluation/data")
+    data_path = Path("evaluation/data")
 
     collection_name = f"test_e2e_{uuid.uuid4().hex}"
 

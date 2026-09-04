@@ -1,8 +1,8 @@
 from unittest.mock import Mock
 
 from app.models.chunk import DocumentChunk
-from app.services.evaluation.runner import RetrievalEvaluationRunner
-from tests.evaluation.retrieval_dataset import RetrievalEvaluationCase
+from evaluation.dataset import RetrievalEvaluationCase
+from evaluation.runner import RetrievalEvaluationRunner
 
 
 def test_evaluate_case():
