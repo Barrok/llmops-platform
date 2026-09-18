@@ -1,5 +1,6 @@
 from unittest.mock import patch
 
+from app.config.settings import settings
 from app.services.embeddings.ollama import OllamaEmbeddingClient
 
 
@@ -14,7 +15,7 @@ def test_ollama_embedding_client():
         mock_instance = mock_client.return_value
         mock_instance.embed.return_value = response
 
-        client = OllamaEmbeddingClient()
+        client = OllamaEmbeddingClient(base_url=settings.OLLAMA_BASE_URL)
 
         embedding = client.embed("Hello world")
 

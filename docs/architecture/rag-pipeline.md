@@ -59,7 +59,6 @@ LLM Prompt
 
 Retrieved chunks are formatted by ContextBuilder and injected into the
 prompt sent to the LLM.
-
 The retrieved context is request-scoped and is not stored in the
 conversation history.
 
@@ -93,7 +92,7 @@ The current retrieval baseline is evaluated using Recall@K.
 
 The initial evaluation achieved:
 
-```Recall@1 = 1.0```
+```Recall@1 = 0.66```
 
 across three controlled evaluation cases.
 

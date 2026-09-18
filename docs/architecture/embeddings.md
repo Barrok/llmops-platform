@@ -31,7 +31,6 @@ The vector size must match the Qdrant collection configuration.
 
 Local embeddings allow the RAG pipeline to operate without external API
 dependencies or cloud services.
-
 The provider abstraction allows the embedding model or backend to be
 replaced without changing application-level embedding logic.
 
@@ -39,6 +38,5 @@ replaced without changing application-level embedding logic.
 
 The current embedding model is a baseline rather than a final production
 choice.
-
 Embedding model quality and retrieval performance will be evaluated during
 future RAG evaluation stages.

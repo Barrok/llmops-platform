@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from app.config.settings import settings
 from app.services.embeddings.ollama import OllamaEmbeddingClient
 from app.services.embeddings.service import EmbeddingService
 from app.services.ingestion.chunker import DocumentChunker
@@ -25,12 +26,12 @@ def test_rag_pipeline_indexes_and_retrieves(tmp_path: Path):
     collection_name = f"test_rag_{uuid.uuid4().hex}"
 
     embedding_service = EmbeddingService(
-        client=OllamaEmbeddingClient(),
+        client=OllamaEmbeddingClient(base_url=settings.OLLAMA_BASE_URL),
     )
 
     vector_store = QdrantVectorStore(
-        host="localhost",
-        port=6333,
+        host=settings.QDRANT_HOST,
+        port=settings.QDRANT_PORT,
         collection_name=collection_name,
         vector_size=768,
     )

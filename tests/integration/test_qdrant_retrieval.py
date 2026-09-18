@@ -2,6 +2,7 @@ import uuid
 
 import pytest
 
+from app.config.settings import settings
 from app.models.chunk import DocumentChunk
 from app.models.embedded_chunk import EmbeddedChunk
 from app.services.vector_store.qdrant import QdrantVectorStore
@@ -12,8 +13,8 @@ def test_qdrant_retrieves_most_similar_chunk():
     collection_name = f"test_retrieval_{uuid.uuid4().hex}"
 
     store = QdrantVectorStore(
-        host="localhost",
-        port=6333,
+        host=settings.QDRANT_HOST,
+        port=settings.QDRANT_PORT,
         collection_name=collection_name,
         vector_size=3,
     )

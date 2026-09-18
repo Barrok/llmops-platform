@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from app.config.settings import settings
 from app.services.agent.conversation import ConversationManager
 from app.services.agent.prompts import PromptManager
 from app.services.agent.service import AgentService
@@ -25,12 +26,12 @@ def test_rag_end_to_end():
     collection_name = f"test_e2e_{uuid.uuid4().hex}"
 
     embedding_service = EmbeddingService(
-        client=OllamaEmbeddingClient(),
+        client=OllamaEmbeddingClient(base_url=settings.OLLAMA_BASE_URL),
     )
 
     vector_store = QdrantVectorStore(
-        host="localhost",
-        port=6333,
+        host=settings.QDRANT_HOST,
+        port=settings.QDRANT_PORT,
         collection_name=collection_name,
         vector_size=768,
     )
@@ -55,7 +56,7 @@ def test_rag_end_to_end():
     pipeline.process_directory(str(data_path))
 
     agent = AgentService(
-        llm_client=OllamaClient(),
+        llm_client=OllamaClient(base_url=settings.OLLAMA_BASE_URL),
         prompt_manager=PromptManager(),
         conversation_manager=ConversationManager(),
         retrieval_service=retrieval_service,

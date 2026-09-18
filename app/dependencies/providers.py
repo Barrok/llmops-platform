@@ -1,3 +1,4 @@
+from app.config.settings import settings
 from app.services.agent.conversation import ConversationManager
 from app.services.agent.prompts import PromptManager
 from app.services.agent.service import AgentService
@@ -23,12 +24,15 @@ def get_conversation_manager() -> ConversationManager:
 
 def get_embedding_service() -> EmbeddingService:
     return EmbeddingService(
-        client=OllamaEmbeddingClient(),
+        client=OllamaEmbeddingClient(base_url=settings.OLLAMA_BASE_URL),
     )
 
 
 def get_vector_store() -> QdrantVectorStore:
-    return QdrantVectorStore()
+    return QdrantVectorStore(
+        host=settings.QDRANT_HOST,
+        port=settings.QDRANT_PORT,
+    )
 
 
 def get_retrieval_service() -> RetrievalService:

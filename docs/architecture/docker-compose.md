@@ -15,28 +15,27 @@ flowchart LR
 
 ## Services
 
-### API
-
-The `api` service runs the FastAPI application.
+### API (`api`)
 
 - Container: `llmops-api`
 - Port: `8000`
 - Purpose: exposes the application API and communicates with the LLM runtime.
 
-### Ollama
-
-The `ollama` service runs the Ollama LLM runtime.
+### Ollama (`ollama`)
 
 - Container: `llmops-ollama`
 - Port: `11434`
 - Model: `qwen3:8b`
-- Purpose: provides local LLM inference.
+- Purpose: Provides local LLM inference services.
+- Internal Endpoint:** `http://ollama:11434`
 
-The API communicates with Ollama using the Docker Compose service name:
+** Note: The API must not use `localhost:11434` to communicate with Ollama from inside the container. **
 
-`http://ollama:11434`
+### Qdrant (`qdrant`)
 
-The API must not use `localhost:11434` to communicate with Ollama from inside the container.
+- Container: `llmops-qdrant`
+- Port: `6333`
+- Purpose: Provides vector storage and similarity search capabilities.
 
 ## Persistence
 

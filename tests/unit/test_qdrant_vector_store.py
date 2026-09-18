@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock, patch
 
+from app.config.settings import settings
 from app.models.chunk import DocumentChunk
 from app.models.embedded_chunk import EmbeddedChunk
 from app.services.vector_store.qdrant import QdrantVectorStore
@@ -11,7 +12,7 @@ def test_qdrant_vector_store_creates_collection(mock_client):
     mock_instance.get_collections.return_value.collections = []
     mock_client.return_value = mock_instance
 
-    QdrantVectorStore()
+    QdrantVectorStore(host=settings.QDRANT_HOST, port=settings.QDRANT_PORT)
 
     mock_client.assert_called_once_with(
         host="localhost",
@@ -37,7 +38,7 @@ def test_qdrant_vector_store_upserts_chunks(mock_client):
 
     mock_client.return_value = mock_instance
 
-    store = QdrantVectorStore()
+    store = QdrantVectorStore(host=settings.QDRANT_HOST, port=settings.QDRANT_PORT)
 
     chunk = DocumentChunk(
         content="Hello world",
@@ -86,7 +87,7 @@ def test_qdrant_vector_store_retrieves_chunks(mock_client):
 
     mock_instance.query_points.return_value.points = [point]
 
-    store = QdrantVectorStore()
+    store = QdrantVectorStore(host=settings.QDRANT_HOST, port=settings.QDRANT_PORT)
 
     result = store.retrieve(
         query_embedding=[0.1] * 768,

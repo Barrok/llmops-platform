@@ -32,7 +32,6 @@ This keeps retrieval logic independent from the concrete vector database.
 
 The current implementation uses cosine similarity to identify the most
 relevant document chunks.
-
 The number of retrieved chunks is controlled by the limit parameter.
 
 The current default is:

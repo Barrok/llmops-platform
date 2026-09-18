@@ -40,11 +40,8 @@ and chunk content.
 
 Application code accesses vector storage through the VectorStore
 abstraction.
-
 Retrieval is exposed through the ```Retriever``` abstraction.
-
 The concrete ```QdrantVectorStore``` implements both interfaces.
-
 This keeps Qdrant-specific implementation details outside the application
 services.
 

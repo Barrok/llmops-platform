@@ -8,11 +8,11 @@ class OllamaEmbeddingClient(EmbeddingClient):
 
     def __init__(
         self,
+        base_url: str,
         model: str = "nomic-embed-text",
-        host: str = "http://localhost:11434",
     ):
         self.model = model
-        self.client = ollama.Client(host=host)
+        self.client = ollama.Client(host=base_url)
 
     def embed(self, text: str) -> list[float]:
         response = self.client.embed(

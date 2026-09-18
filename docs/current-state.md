@@ -18,7 +18,7 @@ The current system provides:
 - RAG pipeline orchestration for document indexing and retrieval
 - Context injection of retrieved chunks into the LLM prompt
 - Retrieval evaluation using a controlled evaluation dataset
-- Recall@K evaluation with an initial Recall@1 baseline of 1.0 across 3 evaluation cases
+- Recall@K evaluation with an initial Recall@1 baseline of 0.66 across 3 evaluation cases
 - End-to-end RAG integration testing
 - Unit and integration test coverage
 
@@ -98,9 +98,9 @@ as part of the conversation history.
 
 The following capabilities are still planned:
 
-- RAG context injection into the LLM
 - Message queues
 - Redis
+- Observability
 - Kubernetes
 - Infrastructure as Code
 - Production observability
@@ -112,7 +112,7 @@ three queries with known relevant source documents.
 
 The current baseline is:
 
-```Recall@1 = 1.0```
+```Recall@1 = 0.66```
 
 across three evaluation cases.
 

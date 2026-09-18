@@ -14,8 +14,8 @@ class QdrantVectorStore(VectorStore, Retriever):
 
     def __init__(
         self,
-        host: str = "localhost",
-        port: int = 6333,
+        host: str,
+        port: int,
         collection_name: str = "documents",
         vector_size: int = 768,
     ):
